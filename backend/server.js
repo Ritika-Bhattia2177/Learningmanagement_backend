@@ -1,6 +1,8 @@
 require('dotenv').config();
+
 const express = require('express');
 const cors = require('cors');
+
 const connectDB = require('./config/database');
 const loggerMiddleware = require('./middleware/logger');
 const errorHandler = require('./middleware/errorHandler');
@@ -31,8 +33,8 @@ app.get('/', (req, res) => {
     endpoints: {
       auth: '/api/auth',
       courses: '/api/courses',
-      enrollments: '/api/enrollments'
-    }
+      enrollments: '/api/enrollments',
+    },
   });
 });
 
@@ -45,29 +47,17 @@ app.use('/api/enrollments', enrollmentRoutes);
 app.use((req, res) => {
   res.status(404).json({
     success: false,
-    message: 'Route not found'
+    message: 'Route not found',
   });
 });
 
-// Error handling middleware (should be last)
+// Error handling middleware
 app.use(errorHandler);
-
-// Start server
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`
-  ╔═══════════════════════════════════════╗
-  ║  Learning Management System API       ║
-  ║  Server running on port ${PORT}        ║
-  ║  Environment: ${process.env.NODE_ENV}        ║
-  ╚═══════════════════════════════════════╝
-  `);
-});
 
 // Handle unhandled rejections
 process.on('unhandledRejection', (err) => {
   console.error('Unhandled Rejection:', err);
-  process.exit(1);
 });
 
+// EXPORT APP FOR VERCEL
 module.exports = app;
