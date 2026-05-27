@@ -1,0 +1,317 @@
+{
+  "info": {
+    "name": "Learning Management System API",
+    "description": "Complete collection for testing LMS API endpoints",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Register User",
+          "request": {
+            "method": "POST",
+            "header": [{
+              "key": "Content-Type",
+              "value": "application/json"
+            }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"name\": \"John Doe\", \"email\": \"john@example.com\", \"password\": \"password123\", \"role\": \"student\"}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/auth/register",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "auth", "register"]
+            }
+          }
+        },
+        {
+          "name": "Login User",
+          "request": {
+            "method": "POST",
+            "header": [{
+              "key": "Content-Type",
+              "value": "application/json"
+            }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"email\": \"john@example.com\", \"password\": \"password123\"}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/auth/login",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "auth", "login"]
+            }
+          }
+        },
+        {
+          "name": "Get User Profile",
+          "request": {
+            "method": "GET",
+            "header": [{
+              "key": "Authorization",
+              "value": "Bearer YOUR_TOKEN_HERE"
+            }],
+            "url": {
+              "raw": "http://localhost:5000/api/auth/profile",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "auth", "profile"]
+            }
+          }
+        },
+        {
+          "name": "Update User Profile",
+          "request": {
+            "method": "PUT",
+            "header": [{
+              "key": "Authorization",
+              "value": "Bearer YOUR_TOKEN_HERE"
+            }, {
+              "key": "Content-Type",
+              "value": "application/json"
+            }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"name\": \"John Smith\", \"bio\": \"I am a developer\"}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/auth/profile",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "auth", "profile"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Courses",
+      "item": [
+        {
+          "name": "Get All Courses",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/courses",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "courses"]
+            }
+          }
+        },
+        {
+          "name": "Get Single Course",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/courses/COURSE_ID",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "courses", "COURSE_ID"]
+            }
+          }
+        },
+        {
+          "name": "Create Course",
+          "request": {
+            "method": "POST",
+            "header": [{
+              "key": "Authorization",
+              "value": "Bearer YOUR_TOKEN_HERE"
+            }, {
+              "key": "Content-Type",
+              "value": "application/json"
+            }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"title\": \"Web Development Basics\", \"description\": \"Learn HTML, CSS, and JavaScript fundamentals\", \"category\": \"Programming\", \"duration\": \"4 weeks\", \"price\": 99, \"level\": \"Beginner\", \"topics\": [\"HTML\", \"CSS\", \"JavaScript\"]}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/courses",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "courses"]
+            }
+          }
+        },
+        {
+          "name": "Update Course",
+          "request": {
+            "method": "PUT",
+            "header": [{
+              "key": "Authorization",
+              "value": "Bearer YOUR_TOKEN_HERE"
+            }, {
+              "key": "Content-Type",
+              "value": "application/json"
+            }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"price\": 79}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/courses/COURSE_ID",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "courses", "COURSE_ID"]
+            }
+          }
+        },
+        {
+          "name": "Delete Course",
+          "request": {
+            "method": "DELETE",
+            "header": [{
+              "key": "Authorization",
+              "value": "Bearer YOUR_TOKEN_HERE"
+            }],
+            "url": {
+              "raw": "http://localhost:5000/api/courses/COURSE_ID",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "courses", "COURSE_ID"]
+            }
+          }
+        },
+        {
+          "name": "Search Courses",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/courses/search?query=programming",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "courses", "search"],
+              "query": [{
+                "key": "query",
+                "value": "programming"
+              }]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Enrollments",
+      "item": [
+        {
+          "name": "Enroll in Course",
+          "request": {
+            "method": "POST",
+            "header": [{
+              "key": "Authorization",
+              "value": "Bearer YOUR_TOKEN_HERE"
+            }, {
+              "key": "Content-Type",
+              "value": "application/json"
+            }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"courseId\": \"COURSE_ID\"}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/enrollments",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "enrollments"]
+            }
+          }
+        },
+        {
+          "name": "Get My Enrollments",
+          "request": {
+            "method": "GET",
+            "header": [{
+              "key": "Authorization",
+              "value": "Bearer YOUR_TOKEN_HERE"
+            }],
+            "url": {
+              "raw": "http://localhost:5000/api/enrollments/my-enrollments",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "enrollments", "my-enrollments"]
+            }
+          }
+        },
+        {
+          "name": "Update Enrollment Progress",
+          "request": {
+            "method": "PUT",
+            "header": [{
+              "key": "Authorization",
+              "value": "Bearer YOUR_TOKEN_HERE"
+            }, {
+              "key": "Content-Type",
+              "value": "application/json"
+            }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"progress\": 50, \"status\": \"active\"}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/enrollments/ENROLLMENT_ID",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "enrollments", "ENROLLMENT_ID"]
+            }
+          }
+        },
+        {
+          "name": "Drop Course",
+          "request": {
+            "method": "DELETE",
+            "header": [{
+              "key": "Authorization",
+              "value": "Bearer YOUR_TOKEN_HERE"
+            }],
+            "url": {
+              "raw": "http://localhost:5000/api/enrollments/ENROLLMENT_ID",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "enrollments", "ENROLLMENT_ID"]
+            }
+          }
+        },
+        {
+          "name": "Get Course Enrollments",
+          "request": {
+            "method": "GET",
+            "header": [{
+              "key": "Authorization",
+              "value": "Bearer YOUR_TOKEN_HERE"
+            }],
+            "url": {
+              "raw": "http://localhost:5000/api/enrollments/course/COURSE_ID/students",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "enrollments", "course", "COURSE_ID", "students"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
