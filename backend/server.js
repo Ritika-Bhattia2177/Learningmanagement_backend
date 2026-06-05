@@ -59,5 +59,28 @@ process.on('unhandledRejection', (err) => {
   console.error('Unhandled Rejection:', err);
 });
 
+const startServer = async () => {
+  const port = process.env.PORT || 5000;
+
+  try {
+    await connectDB();
+
+    app.listen(port, () => {
+      console.log('╔═══════════════════════════════════════╗');
+      console.log('║  Learning Management System API      ║');
+      console.log(`║  Server running on port ${port}`.padEnd(39) + '║');
+      console.log(`║  Environment: ${process.env.NODE_ENV || 'development'}`.padEnd(39) + '║');
+      console.log('╚═══════════════════════════════════════╝');
+    });
+  } catch (error) {
+    console.error('Failed to start server:', error);
+    process.exit(1);
+  }
+};
+
+if (require.main === module) {
+  startServer();
+}
+
 // EXPORT APP FOR VERCEL
 module.exports = app;
